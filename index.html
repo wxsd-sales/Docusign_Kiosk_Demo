@@ -1,376 +1,162 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en" class="has-background-dark">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2575.7">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Times; -webkit-text-stroke: #000000}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Times; -webkit-text-stroke: #000000; min-height: 14.0px}
-    span.s1 {font-kerning: none}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DocuSign Clickwrap Demo - Dark Mode</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <script src="https://js.docusign.com/bundle.js"></script>
+    <style>
+        /* Dark mode overrides for Bulma */
+        body {
+            background-color: #1a1a1a;
+            color: #e0e0e0;
+        }
+        
+        .box {
+            background-color: #2a2a2a;
+            color: #e0e0e0;
+        }
+        
+        .title, .subtitle {
+            color: #e0e0e0;
+        }
+        
+        /* DocuSign Clickwrap container styling */
+        #ds-clickwrap {
+            background-color: #2a2a2a;
+            padding: 1.5rem;
+            border-radius: 6px;
+            margin: 1rem 0;
+        }
+        
+        .button.is-primary {
+            background-color: #3273dc;
+        }
+        
+        .button.is-primary:hover {
+            background-color: #2366d1;
+        }
+    </style>
 </head>
 <body>
-<p class="p1"><span class="s1">&lt;!DOCTYPE html&gt;</span></p>
-<p class="p1"><span class="s1">&lt;html lang="en"&gt;</span></p>
-<p class="p1"><span class="s1">&lt;head&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;meta http-equiv="X-UA-Compatible" content="IE=edge"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;title&gt;Cisco Kiosk with Docusign&lt;/title&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;meta name="description" content="Cisco interactive kiosk with DocuSign integration for document management"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;meta name="author" content="Cisco Systems"&gt;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">    </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;!-- Favicon --&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;link rel="icon" type="image/x-icon" href="/favicon.ico"&gt;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">    </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;!-- Bulma CSS CDN (Latest version) --&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css"&gt;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">    </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;!-- Font Awesome for icons --&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"&gt;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">    </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;!-- Custom CSS for Dark Mode and Cisco Branding --&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;style&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>:root {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>--cisco-blue: #049fd9;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>--cisco-dark-blue: #005073;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>--cisco-green: #6cc04a;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>--cisco-orange: #ff7300;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">        </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>/* Dark mode configuration */</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>html {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>background-color: #0a0a0a;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>color: #ffffff;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">        </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>body {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>background-color: #0a0a0a;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>color: #ffffff;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>min-height: 100vh;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">        </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>/* Override Bulma colors for dark mode */</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.navbar {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>background-color: var(--cisco-dark-blue) !important;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">        </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.hero {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>background: linear-gradient(135deg, var(--cisco-dark-blue), var(--cisco-blue));</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">        </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.section {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>background-color: #1a1a1a;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">        </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.box {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>background-color: #2a2a2a;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>border: 1px solid #404040;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>box-shadow: 0 2px 3px rgba(10, 10, 10, 0.3);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">        </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.card {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>background-color: #2a2a2a;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>border: 1px solid #404040;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">        </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.card-content {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>background-color: #2a2a2a;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>color: #ffffff;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">        </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.title, .subtitle {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>color: #ffffff !important;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">        </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.button.is-primary {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>background-color: var(--cisco-blue);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>border-color: var(--cisco-blue);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">        </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.button.is-primary:hover {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>background-color: var(--cisco-dark-blue);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>border-color: var(--cisco-dark-blue);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">        </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.button.is-success {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>background-color: var(--cisco-green);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>border-color: var(--cisco-green);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">        </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.notification.is-info {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>background-color: var(--cisco-blue);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>color: white;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">        </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.footer {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>background-color: #1a1a1a;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>color: #ffffff;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>border-top: 2px solid var(--cisco-blue);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">        </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>/* Custom kiosk styles */</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.kiosk-header {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>background: linear-gradient(135deg, var(--cisco-dark-blue), var(--cisco-blue));</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>padding: 2rem 0;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>text-align: center;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">        </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.docusign-section {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>border-left: 4px solid var(--cisco-orange);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>padding-left: 1rem;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">        </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.status-indicator {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>display: inline-block;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>width: 12px;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>height: 12px;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>border-radius: 50%;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>margin-right: 0.5rem;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">        </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.status-online {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>background-color: var(--cisco-green);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">        </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.status-offline {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>background-color: #ff3860;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/style&gt;</span></p>
-<p class="p1"><span class="s1">&lt;/head&gt;</span></p>
-<p class="p1"><span class="s1">&lt;body&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;!-- Navigation --&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;nav class="navbar" role="navigation" aria-label="main navigation"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="navbar-brand"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;a class="navbar-item" href="#"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;strong style="color: white;"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;i class="fas fa-desktop mr-2"&gt;&lt;/i&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>Cisco Kiosk</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/strong&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/a&gt;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarMenu"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;span aria-hidden="true"&gt;&lt;/span&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;span aria-hidden="true"&gt;&lt;/span&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;span aria-hidden="true"&gt;&lt;/span&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/a&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">        </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div id="navbarMenu" class="navbar-menu"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div class="navbar-start"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;a href="#dashboard" class="navbar-item has-text-white"&gt;Dashboard&lt;/a&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;a href="#documents" class="navbar-item has-text-white"&gt;Documents&lt;/a&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;a href="#settings" class="navbar-item has-text-white"&gt;Settings&lt;/a&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div class="navbar-end"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div class="navbar-item"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;span class="status-indicator status-online"&gt;&lt;/span&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;span class="has-text-white"&gt;DocuSign Connected&lt;/span&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/nav&gt;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">    </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;!-- Hero Section --&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;section class="hero kiosk-header"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="hero-body"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div class="container has-text-centered"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;h1 class="title is-1 has-text-white"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;i class="fas fa-file-signature mr-3"&gt;&lt;/i&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>Cisco Kiosk with DocuSign</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/h1&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;p class="subtitle is-4 has-text-white"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>Streamlined document management and digital signature solution</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/section&gt;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">    </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;!-- Main Content --&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;section class="section"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="container"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;!-- Dashboard Section --&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div id="dashboard" class="mb-6"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;h2 class="title is-2"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;i class="fas fa-tachometer-alt mr-2"&gt;&lt;/i&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>Dashboard</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/h2&gt;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">                </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div class="columns"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;div class="column is-4"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;div class="box has-text-centered"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;h3 class="title is-4"&gt;Documents Signed&lt;/h3&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;p class="title is-1 has-text-primary"&gt;247&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;p class="subtitle"&gt;This Month&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">                    </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;div class="column is-4"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;div class="box has-text-centered"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;h3 class="title is-4"&gt;Pending Signatures&lt;/h3&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;p class="title is-1 has-text-warning"&gt;12&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;p class="subtitle"&gt;Awaiting Action&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">                    </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;div class="column is-4"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;div class="box has-text-centered"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;h3 class="title is-4"&gt;System Status&lt;/h3&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;p class="title is-4 has-text-success"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>&lt;i class="fas fa-check-circle"&gt;&lt;/i&gt; Online</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;p class="subtitle"&gt;All Systems Operational&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;!-- Documents Section --&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div id="documents" class="mb-6"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;h2 class="title is-2"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;i class="fas fa-folder-open mr-2"&gt;&lt;/i&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>Document Management</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/h2&gt;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">                </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div class="columns"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;div class="column is-8"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;div class="box docusign-section"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;h3 class="title is-4"&gt;DocuSign Integration&lt;/h3&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;p class="mb-4"&gt;Upload, send, and track documents for electronic signature.&lt;/p&gt;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">                            </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;div class="field is-grouped"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>&lt;div class="control"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                                    </span>&lt;button class="button is-primary is-medium"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                                        </span>&lt;span class="icon"&gt;&lt;i class="fas fa-upload"&gt;&lt;/i&gt;&lt;/span&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                                        </span>&lt;span&gt;Upload Document&lt;/span&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                                    </span>&lt;/button&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">                                </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>&lt;div class="control"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                                    </span>&lt;button class="button is-success is-medium"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                                        </span>&lt;span class="icon"&gt;&lt;i class="fas fa-signature"&gt;&lt;/i&gt;&lt;/span&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                                        </span>&lt;span&gt;Send for Signature&lt;/span&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                                    </span>&lt;/button&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">                    </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;div class="column is-4"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;div class="box"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;h3 class="title is-5"&gt;Quick Actions&lt;/h3&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;div class="content"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>&lt;a href="#" class="button is-fullwidth mb-2"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                                    </span>&lt;span class="icon"&gt;&lt;i class="fas fa-eye"&gt;&lt;/i&gt;&lt;/span&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                                    </span>&lt;span&gt;View Recent Documents&lt;/span&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>&lt;/a&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>&lt;a href="#" class="button is-fullwidth mb-2"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                                    </span>&lt;span class="icon"&gt;&lt;i class="fas fa-download"&gt;&lt;/i&gt;&lt;/span&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                                    </span>&lt;span&gt;Download Completed&lt;/span&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>&lt;/a&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>&lt;a href="#" class="button is-fullwidth"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                                    </span>&lt;span class="icon"&gt;&lt;i class="fas fa-history"&gt;&lt;/i&gt;&lt;/span&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                                    </span>&lt;span&gt;Audit Trail&lt;/span&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>&lt;/a&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;!-- Settings Section --&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div id="settings" class="mb-6"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;h2 class="title is-2"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;i class="fas fa-cog mr-2"&gt;&lt;/i&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>System Settings</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/h2&gt;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">                </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div class="box"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;div class="notification is-info"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;strong&gt;System Information:&lt;/strong&gt; Kiosk is configured and ready for document processing.</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">                    </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;div class="columns"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;div class="column"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;h4 class="title is-5"&gt;DocuSign Configuration&lt;/h4&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;p&gt;API Status: &lt;strong class="has-text-success"&gt;Connected&lt;/strong&gt;&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;p&gt;Account: &lt;strong&gt;cisco-enterprise@example.com&lt;/strong&gt;&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;p&gt;Last Sync: &lt;strong&gt;2 minutes ago&lt;/strong&gt;&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">                        </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;div class="column"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;h4 class="title is-5"&gt;Kiosk Settings&lt;/h4&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;p&gt;Location: &lt;strong&gt;Building A - Lobby&lt;/strong&gt;&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;p&gt;Device ID: &lt;strong&gt;KIOSK-001&lt;/strong&gt;&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;p&gt;Version: &lt;strong&gt;2.1.0&lt;/strong&gt;&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/section&gt;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">    </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;!-- Footer --&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;footer class="footer"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="content has-text-centered"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;strong&gt;Cisco Kiosk with DocuSign&lt;/strong&gt; &amp;copy; 2025 Cisco Systems, Inc. All rights reserved.</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;span class="icon-text"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;span class="icon"&gt;&lt;i class="fas fa-shield-alt"&gt;&lt;/i&gt;&lt;/span&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;span&gt;Secure Document Processing&lt;/span&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/span&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/footer&gt;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">    </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;!-- JavaScript --&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;script&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>// Navbar burger functionality</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>document.addEventListener('DOMContentLoaded', () =&gt; {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>if ($navbarBurgers.length &gt; 0) {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>$navbarBurgers.forEach(el =&gt; {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>el.addEventListener('click', () =&gt; {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>const target = el.dataset.target;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>const $target = document.getElementById(target);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>el.classList.toggle('is-active');</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>$target.classList.toggle('is-active');</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>});</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>});</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>});</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">        </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>// Smooth scrolling for navigation links</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>document.querySelectorAll('a[href^="#"]').forEach(anchor =&gt; {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>anchor.addEventListener('click', function (e) {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>e.preventDefault();</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>const target = document.querySelector(this.getAttribute('href'));</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>if (target) {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>target.scrollIntoView({</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>behavior: 'smooth'</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>});</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>});</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>});</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">        </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>// Simulate real-time updates</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>function updateStatus() {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>console.log('Kiosk status: Active');</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>// Add your real-time status update logic here</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">        </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>// Initialize kiosk</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>console.log('Cisco Kiosk with DocuSign initialized successfully!');</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>setInterval(updateStatus, 30000); // Update every 30 seconds</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/script&gt;</span></p>
-<p class="p1"><span class="s1">&lt;/body&gt;</span></p>
-<p class="p1"><span class="s1">&lt;/html&gt;</span></p>
+    <section class="section">
+        <div class="container">
+            <div class="columns is-centered">
+                <div class="column is-8">
+                    <div class="box">
+                        <h1 class="title has-text-centered">
+                            Terms of Service Agreement
+                        </h1>
+                        <h2 class="subtitle has-text-centered">
+                            Please review and accept our terms
+                        </h2>
+                        
+                        <div class="content">
+                            <p>
+                                Welcome! Before you continue, please review and accept our terms of service.
+                                This clickwrap agreement ensures you understand and agree to our policies.
+                            </p>
+                        </div>
+
+                        <!-- DocuSign Clickwrap Container -->
+                        <div id="ds-clickwrap"></div>
+
+                        <div class="buttons is-centered mt-5">
+                            <button class="button is-primary is-large" id="agree-button" disabled>
+                                Continue
+                            </button>
+                        </div>
+
+                        <div id="status-message" class="notification is-hidden mt-4"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // DocuSign Clickwrap Configuration
+        // Replace these with your actual DocuSign Clickwrap credentials
+        const clickwrapConfig = {
+            environment: 'https://demo.docusign.net', // Use 'https://www.docusign.net' for production
+            accountId: '7bbd77ca-a164-4775-b9dd-17ac82ed915c',
+            clickwrapId: '08ec5c44-11be-4ee5-b6b6-ce20d9c4046c',
+            clientUserId: 'user_' + Date.now(), // Unique identifier for the user
+            // Optional: Add more user details
+            // fullName: 'John Doe',
+            // email: 'john.doe@example.com'
+        };
+
+        // Initialize DocuSign Clickwrap
+        let clickwrapInstance;
+
+        function initializeClickwrap() {
+            try {
+                // Create clickwrap instance
+                clickwrapInstance = window.docuSignClick.Clickwrap.render({
+                    environment: clickwrapConfig.environment,
+                    accountId: clickwrapConfig.accountId,
+                    clickwrapId: clickwrapConfig.clickwrapId,
+                    clientUserId: clickwrapConfig.clientUserId,
+                    onAgreed: handleAgreement,
+                    onDeclined: handleDecline,
+                    onError: handleError
+                }, '#ds-clickwrap');
+
+                console.log('DocuSign Clickwrap initialized successfully');
+            } catch (error) {
+                console.error('Error initializing clickwrap:', error);
+                showMessage('Error loading agreement. Please refresh the page.', 'is-danger');
+            }
+        }
+
+        // Handle when user agrees to terms
+        function handleAgreement(agreementData) {
+            console.log('User agreed to terms:', agreementData);
+            document.getElementById('agree-button').disabled = false;
+            showMessage('Thank you for accepting the terms!', 'is-success');
+        }
+
+        // Handle when user declines terms
+        function handleDecline(declineData) {
+            console.log('User declined terms:', declineData);
+            document.getElementById('agree-button').disabled = true;
+            showMessage('You must accept the terms to continue.', 'is-warning');
+        }
+
+        // Handle errors
+        function handleError(error) {
+            console.error('Clickwrap error:', error);
+            showMessage('An error occurred. Please try again.', 'is-danger');
+        }
+
+        // Show status messages
+        function showMessage(message, type) {
+            const statusEl = document.getElementById('status-message');
+            statusEl.textContent = message;
+            statusEl.className = `notification ${type} mt-4`;
+        }
+
+        // Continue button handler
+        document.getElementById('agree-button').addEventListener('click', function() {
+            showMessage('Processing... You have successfully agreed to the terms!', 'is-info');
+            // Add your logic here for what happens after agreement
+            setTimeout(() => {
+                console.log('Redirecting to application...');
+            }, 2000);
+        });
+
+        // Initialize when DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initializeClickwrap);
+        } else {
+            initializeClickwrap();
+        }
+
+        // Note: This demo uses placeholder credentials
+        // You need to replace 'YOUR_ACCOUNT_ID' and 'YOUR_CLICKWRAP_ID' with actual values
+        console.warn('Remember to configure your DocuSign Clickwrap credentials!');
+    </script>
 </body>
 </html>
