@@ -113,14 +113,14 @@
             // Handle when user agrees to terms
             function handleAgreement(agreementData) {
                 console.log('User agreed to terms:', agreementData);
-                document.getElementById('agree-button').disabled = false;
+                //document.getElementById('agree-button').disabled = false;
                 showMessage('Thank you for accepting the terms!', 'is-success');
             }
 
             // Handle when user declines terms
             function handleDecline(declineData) {
                 console.log('User declined terms:', declineData);
-                document.getElementById('agree-button').disabled = true;
+                //document.getElementById('agree-button').disabled = true;
                 showMessage('You must accept the terms to continue.', 'is-warning');
             }
 
