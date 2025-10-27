@@ -65,6 +65,11 @@
     </section>
 
     <script>
+
+            let params = new URLSearchParams(document.location.search);
+            let name = params.get("fullName");
+            console.log(name);
+
             // DocuSign Clickwrap Configuration
             // Replace these with your actual DocuSign Clickwrap credentials
             const clickwrapConfig = {
@@ -89,10 +94,8 @@
                         clickwrapId: clickwrapConfig.clickwrapId,
                         clientUserId: clickwrapConfig.clientUserId,
                         documentData: {
-                            fullName: 'Jane Doe',
-                            email: 'john.doe@example.com',
-                            company: 'Example Inc.',
-                            title: 'Software Engineer',
+                            fullName: name,
+                            company: 'Cisco Systems, Inc.',
                             date: new Date().toISOString()
                         },
                         onAgreed: handleAgreement,
