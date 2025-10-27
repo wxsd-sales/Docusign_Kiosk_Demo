@@ -49,16 +49,6 @@
                         <h1 class="title has-text-centered">
                             Terms of Service Agreement
                         </h1>
-                        <h2 class="subtitle has-text-centered">
-                            Please review and accept our terms
-                        </h2>
-                        
-                        <div class="content">
-                            <p>
-                                Welcome! Before you continue, please review and accept our terms of service.
-                                This clickwrap agreement ensures you understand and agree to our policies.
-                            </p>
-                        </div>
 
                         <!-- DocuSign Clickwrap Container -->
                         <div id="ds-clickwrap"></div>
@@ -100,6 +90,13 @@
                     accountId: clickwrapConfig.accountId,
                     clickwrapId: clickwrapConfig.clickwrapId,
                     clientUserId: clickwrapConfig.clientUserId,
+                    documentData: {
+    fullName: 'Full Name',
+    email: 'Email',
+    company: 'Company',
+    title: 'Job Title',
+    date: 'Date'
+  }
                     onAgreed: handleAgreement,
                     onDeclined: handleDecline,
                     onError: handleError
