@@ -93,8 +93,8 @@
                             email: 'john.doe@example.com',
                             company: 'Example Inc.',
                             title: 'Software Engineer',
-                            date: '2025-01-01'
-                        }
+                            date: new Date().toISOString()
+                        },
                         onAgreed: handleAgreement,
                         onDeclined: handleDecline,
                         onError: handleError
