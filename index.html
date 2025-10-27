@@ -1,160 +1,171 @@
 <!DOCTYPE html>
 <html lang="en" class="has-background-dark">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>DocuSign Clickwrap Demo - Dark Mode</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
+    />
     <!--script src="https://js.docusign.com/bundle.js"></script-->
     <script src="https://demo.docusign.net/clickapi/sdk/latest/docusign-click.js"></script>
     <style>
-        /* Dark mode overrides for Bulma */
-        body {
-            background-color: #1a1a1a;
-            color: #e0e0e0;
-        }
-        
-        .box {
-            background-color: #2a2a2a;
-            color: #e0e0e0;
-        }
-        
-        .title, .subtitle {
-            color: #e0e0e0;
-        }
-        
-        /* DocuSign Clickwrap container styling */
-        #ds-clickwrap {
-            background-color: #2a2a2a;
-            padding: 1.5rem;
-            border-radius: 6px;
-            margin: 1rem 0;
-        }
-        
-        .button.is-primary {
-            background-color: #3273dc;
-        }
-        
-        .button.is-primary:hover {
-            background-color: #2366d1;
-        }
+      /* Dark mode overrides for Bulma */
+      body {
+        background-color: #1a1a1a;
+        color: #e0e0e0;
+      }
+
+      .box {
+        background-color: #2a2a2a;
+        color: #e0e0e0;
+      }
+
+      .title,
+      .subtitle {
+        color: #e0e0e0;
+      }
+
+      /* DocuSign Clickwrap container styling */
+      #ds-clickwrap {
+        background-color: #2a2a2a;
+        padding: 1.5rem;
+        border-radius: 6px;
+        margin: 1rem 0;
+      }
+
+      .button.is-primary {
+        background-color: #3273dc;
+      }
+
+      .button.is-primary:hover {
+        background-color: #2366d1;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <section class="section">
-        <div class="container">
-            <div class="columns is-centered">
-                <div class="column is-8">
-                    <div class="box">
-                        <h1 class="title has-text-centered">
-                            Terms of Service Agreement
-                        </h1>
+      <div class="container">
+        <div class="columns is-centered">
+          <div class="column is-8">
+            <div class="box">
+              <h1 class="title has-text-centered">
+                Terms of Service Agreement
+              </h1>
 
-                        <!-- DocuSign Clickwrap Container -->
-                        <div id="ds-clickwrap"></div>
+              <!-- DocuSign Clickwrap Container -->
+              <div id="ds-clickwrap"></div>
 
-                        <div class="buttons is-centered mt-5">
-                            <button class="button is-primary is-large" id="agree-button" disabled>
-                                Continue
-                            </button>
-                        </div>
+              <div class="buttons is-centered mt-5">
+                <button
+                  class="button is-primary is-large"
+                  id="agree-button"
+                  disabled
+                >
+                  Continue
+                </button>
+              </div>
 
-                        <div id="status-message" class="notification is-hidden mt-4"></div>
-                    </div>
-                </div>
+              <div
+                id="status-message"
+                class="notification is-hidden mt-4"
+              ></div>
             </div>
+          </div>
         </div>
+      </div>
     </section>
 
     <script>
-        // DocuSign Clickwrap Configuration
-        // Replace these with your actual DocuSign Clickwrap credentials
-        const clickwrapConfig = {
-            environment: 'https://demo.docusign.net', // Use 'https://www.docusign.net' for production
-            accountId: '7bbd77ca-a164-4775-b9dd-17ac82ed915c',
-            clickwrapId: '08ec5c44-11be-4ee5-b6b6-ce20d9c4046c',
-            clientUserId: 'user_' + Date.now(), // Unique identifier for the user
-            // Optional: Add more user details
-            // fullName: 'John Doe',
-            // email: 'john.doe@example.com'
-        };
+            // DocuSign Clickwrap Configuration
+            // Replace these with your actual DocuSign Clickwrap credentials
+            const clickwrapConfig = {
+                environment: 'https://demo.docusign.net', // Use 'https://www.docusign.net' for production
+                accountId: '7bbd77ca-a164-4775-b9dd-17ac82ed915c',
+                clickwrapId: '08ec5c44-11be-4ee5-b6b6-ce20d9c4046c',
+                clientUserId: 'user_' + Date.now(), // Unique identifier for the user
+                // Optional: Add more user details
+                // fullName: 'John Doe',
+                // email: 'john.doe@example.com'
+            };
 
-        // Initialize DocuSign Clickwrap
-        let clickwrapInstance;
+            // Initialize DocuSign Clickwrap
+            let clickwrapInstance;
 
-        function initializeClickwrap() {
-            try {
-                // Create clickwrap instance
-                clickwrapInstance = window.docuSignClick.Clickwrap.render({
-                    environment: clickwrapConfig.environment,
-                    accountId: clickwrapConfig.accountId,
-                    clickwrapId: clickwrapConfig.clickwrapId,
-                    clientUserId: clickwrapConfig.clientUserId,
-                    documentData: {
-    fullName: 'Full Name',
-    email: 'Email',
-    company: 'Company',
-    title: 'Job Title',
-    date: 'Date'
-  }
-                    onAgreed: handleAgreement,
-                    onDeclined: handleDecline,
-                    onError: handleError
-                }, '#ds-clickwrap');
+            function initializeClickwrap() {
+                try {
+                    // Create clickwrap instance
+                    clickwrapInstance = window.docuSignClick.Clickwrap.render({
+                        environment: clickwrapConfig.environment,
+                        accountId: clickwrapConfig.accountId,
+                        clickwrapId: clickwrapConfig.clickwrapId,
+                        clientUserId: clickwrapConfig.clientUserId,
+                        documentData: {
+                            fullName: 'Jane Doe',
+                            email: 'john.doe@example.com',
+                            company: 'Example Inc.',
+                            title: 'Software Engineer',
+                            date: '2025-01-01'
+                        }
+                        onAgreed: handleAgreement,
+                        onDeclined: handleDecline,
+                        onError: handleError
+                    }, '#ds-clickwrap');
 
-                console.log('DocuSign Clickwrap initialized successfully');
-            } catch (error) {
-                console.error('Error initializing clickwrap:', error);
-                showMessage('Error loading agreement. Please refresh the page.', 'is-danger');
+                    console.log('DocuSign Clickwrap initialized successfully');
+                } catch (error) {
+                    console.error('Error initializing clickwrap:', error);
+                    showMessage('Error loading agreement. Please refresh the page.', 'is-danger');
+                }
             }
-        }
 
-        // Handle when user agrees to terms
-        function handleAgreement(agreementData) {
-            console.log('User agreed to terms:', agreementData);
-            document.getElementById('agree-button').disabled = false;
-            showMessage('Thank you for accepting the terms!', 'is-success');
-        }
+            // Handle when user agrees to terms
+            function handleAgreement(agreementData) {
+                console.log('User agreed to terms:', agreementData);
+                document.getElementById('agree-button').disabled = false;
+                showMessage('Thank you for accepting the terms!', 'is-success');
+            }
 
-        // Handle when user declines terms
-        function handleDecline(declineData) {
-            console.log('User declined terms:', declineData);
-            document.getElementById('agree-button').disabled = true;
-            showMessage('You must accept the terms to continue.', 'is-warning');
-        }
+            // Handle when user declines terms
+            function handleDecline(declineData) {
+                console.log('User declined terms:', declineData);
+                document.getElementById('agree-button').disabled = true;
+                showMessage('You must accept the terms to continue.', 'is-warning');
+            }
 
-        // Handle errors
-        function handleError(error) {
-            console.error('Clickwrap error:', error);
-            showMessage('An error occurred. Please try again.', 'is-danger');
-        }
+            // Handle errors
+            function handleError(error) {
+                console.error('Clickwrap error:', error);
+                showMessage('An error occurred. Please try again.', 'is-danger');
+            }
 
-        // Show status messages
-        function showMessage(message, type) {
-            const statusEl = document.getElementById('status-message');
-            statusEl.textContent = message;
-            statusEl.className = `notification ${type} mt-4`;
-        }
+            // Show status messages
+            function showMessage(message, type) {
+                const statusEl = document.getElementById('status-message');
+                statusEl.textContent = message;
+                statusEl.className = `notification ${type} mt-4`;
+            }
 
-        // Continue button handler
-        document.getElementById('agree-button').addEventListener('click', function() {
-            showMessage('Processing... You have successfully agreed to the terms!', 'is-info');
-            // Add your logic here for what happens after agreement
-            setTimeout(() => {
-                console.log('Redirecting to application...');
-            }, 2000);
-        });
+            // Continue button handler
+            document.getElementById('agree-button').addEventListener('click', function() {
+                showMessage('Processing... You have successfully agreed to the terms!', 'is-info');
+                // Add your logic here for what happens after agreement
+                setTimeout(() => {
+                    console.log('Redirecting to application...');
+                }, 2000);
+            });
 
-        // Initialize when DOM is ready
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', initializeClickwrap);
-        } else {
-            initializeClickwrap();
-        }
+            // Initialize when DOM is ready
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', initializeClickwrap);
+            } else {
+                initializeClickwrap();
+            }
 
-        // Note: This demo uses placeholder credentials
-        // You need to replace 'YOUR_ACCOUNT_ID' and 'YOUR_CLICKWRAP_ID' with actual values
-        console.warn('Remember to configure your DocuSign Clickwrap credentials!');
+            // Note: This demo uses placeholder credentials
+            // You need to replace 'YOUR_ACCOUNT_ID' and 'YOUR_CLICKWRAP_ID' with actual values
+            console.warn('Remember to configure your DocuSign Clickwrap credentials!');
     </script>
-</body>
+  </body>
 </html>
