@@ -50,22 +50,9 @@
         <div class="columns is-centered">
           <div class="column is-8">
             <div class="box">
-              <h1 class="title has-text-centered">
-                Terms of Service Agreement
-              </h1>
 
               <!-- DocuSign Clickwrap Container -->
               <div id="ds-clickwrap"></div>
-
-              <div class="buttons is-centered mt-5">
-                <button
-                  class="button is-primary is-large"
-                  id="agree-button"
-                  disabled
-                >
-                  Continue
-                </button>
-              </div>
 
               <div
                 id="status-message"
@@ -106,7 +93,7 @@
                             email: 'john.doe@example.com',
                             company: 'Example Inc.',
                             title: 'Software Engineer',
-                            date: '2025-01-01'
+                            date: Date.now()
                         }
                         onAgreed: handleAgreement,
                         onDeclined: handleDecline,
@@ -165,7 +152,7 @@
 
             // Note: This demo uses placeholder credentials
             // You need to replace 'YOUR_ACCOUNT_ID' and 'YOUR_CLICKWRAP_ID' with actual values
-            console.warn('Remember to configure your DocuSign Clickwrap credentials!');
+            //console.warn('Remember to configure your DocuSign Clickwrap credentials!');
     </script>
   </body>
 </html>
