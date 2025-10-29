@@ -67,9 +67,16 @@
     <script>
 
             let params = new URLSearchParams(document.location.search);
-            let name = params.get("fullName");
-            console.log(name);
-
+            //fullName,
+            // returnUrl,
+            // deviceId,
+            // socketId,
+            //let name = params.get("fullName");
+            //console.log(name);
+            console.log(decodeURIComponent(params.get("fullName")));
+            console.log(decodeURIComponent(params.get("returnUrl")));
+            console.log(decodeURIComponent(params.get("deviceId")));
+            console.log(decodeURIComponent(params.get("socketId")));
             // DocuSign Clickwrap Configuration
             // Replace these with your actual DocuSign Clickwrap credentials
             const clickwrapConfig = {
@@ -110,10 +117,24 @@
                 }
             }
 
+            function respondToAgent(user_action) {
+                console.log('Responding to agent...');
+                fetch(decodeURIComponent(params.get("returnUrl")), {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        deviceId: decodeURIComponent(params.get("deviceId")),
+                        socketId: decodeURIComponent(params.get("socketId")),
+                        command: 'reply',
+                        action: user_action
+                    })
+                });
+            }
+
             // Handle when user agrees to terms
             function handleAgreement(agreementData) {
                 console.log('User agreed to terms:', agreementData);
                 //document.getElementById('agree-button').disabled = false;
+                respondToAgent('agree');
                 showMessage('Thank you for accepting the terms!', 'is-success');
             }
 
@@ -122,12 +143,14 @@
                 console.log('User declined terms:', declineData);
                 //document.getElementById('agree-button').disabled = true;
                 showMessage('You must accept the terms to continue.', 'is-warning');
+                respondToAgent('cancel');
             }
 
             // Handle errors
             function handleError(error) {
                 console.error('Clickwrap error:', error);
                 showMessage('An error occurred. Please try again.', 'is-danger');
+                respondToAgent('error');
             }
 
             // Show status messages
