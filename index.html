@@ -119,11 +119,16 @@
 
             function respondToAgent(user_action) {
                 console.log('Responding to agent...');
-                fetch(decodeURIComponent(params.get("returnUrl")), {
+                const response_url = decodeURIComponent(params.get("returnUrl"));
+                console.log(response_url);
+                fetch(response_url, {
                     method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
                     body: JSON.stringify({
-                        deviceId: decodeURIComponent(params.get("deviceId")),
-                        socketId: decodeURIComponent(params.get("socketId")),
+                        deviceId: params.get("deviceId"),
+                        socketId: params.get("socketId"),
                         command: 'reply',
                         action: user_action
                     })
